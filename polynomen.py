@@ -2,26 +2,21 @@ import numpy as np
 import itertools
 from collections import Counter
 
-n = 20
-
+# Generate all binary string combinations of size n
 def binary_combinations(n):
-    # Genereer alle binair combinaties van grootte n
     binary_combinations = list(itertools.product([0, 1], repeat=n))
     return binary_combinations
 
 
+# Generates the list of polynomials
 def generate_coefs(bc):
-    # genereer alle roots van afgeleiden van polynomen van type:
-    # (1-x)(b_1*x^1 + b_2*x^2 + ... + b_n*x^n) met b_i in {0,1}
 
-    #we loopen door alle binary strings
     coefs = []
     for b in bc:
         print(b)
         coef = dict()
         #print(b)
-        #voor elke binary string creeer de bijbehorende coefficienten van het polynoom
-        #en voeg toe aan de lijst van polynomen
+        #For each binary string create the corresponging coefficients for the polynomial and add to the list
         for i in reversed(range(len(b)+1)):
             if i == 0:
                 coef[i] = b[i]*(i+1)
@@ -36,7 +31,7 @@ def generate_coefs(bc):
         coefs += [coef]
     return coefs
 
-
+# Calculates all roots and returns them in a list
 def generate_roots(coefs):
     roots = []
     for index,coef in enumerate(coefs):
@@ -45,7 +40,8 @@ def generate_roots(coefs):
         print(len(coefs)-index)
     #print(roots)
     return roots
-   
+
+# Make sure all roots are between 0 and 1
 def zero_one(roots):
     zero_one_roots = []
     for root in roots:
@@ -55,15 +51,17 @@ def zero_one(roots):
                     zero_one_roots.append(r)
     return zero_one_roots
 
+# Count how many times a root is shared between two or more polynomials
 def count_duplicates(roots):
     teller = Counter(roots)
-    
-    # Filter de elementen die meer dan 1 keer voorkomen
     duplicaten = {element: count for element, count in teller.items() if count > 1}
     print(duplicaten)
     return len(duplicaten)
 
 
+# genereer alle roots van afgeleiden van polynomen van type:
+# (1-x)(b_1*x^1 + b_2*x^2 + ... + b_n*x^n) met b_i in {0,1}
+n = 20
 bc = binary_combinations(n)
 coefs = generate_coefs(bc)
 roots = generate_roots(coefs)
