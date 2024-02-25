@@ -8,7 +8,7 @@ fn1_values = n_values
 
 # Maak een plot)
 plt.figure(figsize=(6, 5))
-plt.plot(n_values, fn0_values, linestyle='-', color='b',label=r'$(1-x)$')
+plt.plot(n_values, fn0_values, linestyle='-', color='b',label=r'$1-x$')
 plt.plot(n_values, fn1_values, linestyle='-', color='r',label=r'$x$')
 plt.axhline(y=2/3, color='g', linestyle='-',label=r'$\frac{2}{3}$')
 plt.grid(True)
